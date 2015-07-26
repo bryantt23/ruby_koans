@@ -1,5 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/neo')
 
+# https://github.com/neo/ruby_koans/blob/master/src/about_proxy_object_project.rb#L117
+
 # Project: Create a Proxy Class
 #
 # In this assignment, create a proxy class (one is started for you
@@ -16,10 +18,28 @@ class Proxy
   def initialize(target_object)
     @object = target_object
     # ADD MORE CODE HERE
+    #--
     @messages = []
+    #++
   end
 
   # WRITE CODE HERE
+  #--
+  attr_reader :messages
+
+  def method_missing(sym, *args, &block)
+    @messages << sym
+    @object.send(sym, *args, &block)
+  end
+
+  def called?(method)
+    @messages.include?(method)
+  end
+
+  def number_of_times_called(method)
+    @messages.select { |m| m == method }.size
+  end
+  #++
 end
 
 # The proxy object should pass the following Koan:
