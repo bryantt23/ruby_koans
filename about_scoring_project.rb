@@ -32,24 +32,56 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 def score(dice)
   total_score=0;
 
-  # You need to write this method
-  if(dice==[])
-    return 0
-  elsif(dice==[5])
-    return 50
-  elsif(dice==[1])
-    return 100
+  num_of_ones=0;
+  num_of_2s=0;
+  num_of_3s=0;
+  num_of_4s=0;
+  num_of_5s=0;
+  num_of_6s=0;
 
-  else
-    dice.each{ |die|
-      if(die==5)
-        total_score+=50
-      else
-        total_score+=100
+  dice.each{ |num|
+    if(num==1)
+      num_of_ones+=1
+      if(num_of_ones==3)
+        return 1000
       end
-    }
-    return total_score
-  end
+    elsif(num==2)
+      num_of_2s+=1
+      if(num_of_2s==3)
+        return 200
+      end
+    elsif(num==3)
+      num_of_3s+=1
+      if(num_of_3s==3)
+        return 300
+      end
+    elsif(num==4)
+      num_of_4s+=1
+      if(num_of_4s==3)
+        return 400
+      end
+    elsif(num==5)
+      num_of_5s+=1
+      if(num_of_5s==3)
+        return 500
+      end
+    else
+      num_of_6s+=1
+      if(num_of_6s==3)
+        return 600
+      end
+    end
+  }
+  # You need to write this method
+
+  dice.each{ |die|
+    if(die==5)
+      total_score+=50
+    elsif(die==1)
+      total_score+=100
+    end
+  }
+  return total_score
 
 end
 
